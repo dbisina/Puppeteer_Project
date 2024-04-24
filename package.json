@@ -1,0 +1,26 @@
+{
+  "name": "puppeteer_project",
+  "version": "1.0.0",
+  "description": "This is an assignment for a job assessment",
+  "main": "twitter_scraper.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "data-uri-to-buffer": "^6.0.2",
+    "express": "^4.19.2",
+    "fetch-blob": "^4.0.0",
+    "formdata-polyfill": "^4.0.10",
+    "node-cron": "^3.0.3",
+    "node-fetch": "^3.3.2",
+    "nodemailer": "^6.9.13",
+    "pg": "^8.11.5",
+    "pg-promise": "^11.6.0",
+    "puppeteer": "^22.7.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0"
+  }
+}
