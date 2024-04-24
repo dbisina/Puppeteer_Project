@@ -1,3 +1,4 @@
+//database.js
 const { Pool } = require('pg');
 
 const dbConfig = {
@@ -12,9 +13,10 @@ const pool = new Pool(dbConfig);
 
 async function savePost(post) {
   const { text, image, video } = post;
-  const query = `INSERT INTO posts (text, image, video) VALUES ($1, $2, $3)`;
-  const values = [text, image, video];
-
+  const existingPost = await db.query(`SELECT * FROM posts WHERE id = $1`, [text]);
+  if (!existingPost.rows.length) {
+      await db.query(`INSERT INTO posts (id, text, image, video) VALUES ($1, $2, $3, $4)`, [text, image, video]);
+    }
   try {
     await pool.query(query, values);
   } catch (error) {

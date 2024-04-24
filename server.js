@@ -1,3 +1,5 @@
+//server.js
+
 const express = require('express');
 const cron = require('node-cron');
 const scraper = require('./scraper');
@@ -9,7 +11,7 @@ app.use(express.json());
 
 async function startServer() {
   // Schedule scraping every 12 hours
-  cron.schedule('0 */12 * * *', async () => {
+  cron.schedule('0 */8 * * *', async () => {
     try {
       const newPosts = await scraper();
       for (const post of newPosts) {
@@ -40,7 +42,7 @@ async function startServer() {
     }
   });
 
-  // Start the server (replace with your desired port)
+  // Start the server (replace with your desired pclsort)
   app.listen(3000, () => {
     console.log('Server listening on port 3000');
   });

@@ -2,9 +2,9 @@
   "name": "puppeteer_project",
   "version": "1.0.0",
   "description": "This is an assignment for a job assessment",
-  "main": "twitter_scraper.js",
+  "main": "scraper.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,7 @@
     "nodemailer": "^6.9.13",
     "pg": "^8.11.5",
     "pg-promise": "^11.6.0",
+    "playwright": "^1.43.1",
     "puppeteer": "^22.7.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0"
