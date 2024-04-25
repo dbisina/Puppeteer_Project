@@ -1,6 +1,7 @@
 //scraper.js
 
 const puppeteer = require("puppeteer");
+const fs = require("fs");
 
 const url = "https://twitter.com/coindesk";
 
@@ -53,7 +54,7 @@ async function scrapeTweets(page, tweetSel) {
       els.map((el) => ({
         text: el.querySelector('[data-testid="tweetText"]').textContent.trim(),
         image: el.querySelector('[data-testid="tweetPhoto"] img')?.getAttribute("src"),
-        video: el.querySelector('[data-testid="tweetPhoto"] video')?.getAttribute("src"),
+        video: el.querySelector('[data-testid="tweetPhoto"] video source')?.getAttribute("src"),
       }))
     );
 
@@ -63,7 +64,13 @@ async function scrapeTweets(page, tweetSel) {
       }
     }
   }
+  fs.writeFile('Tweets.json', JSON.stringify(posts), (err) => {
+    if (err) throw err;
+    console.log('Data written to file')
+  });
   return posts;
 }
+
+
 
 module.exports = scrapeCoindesk;

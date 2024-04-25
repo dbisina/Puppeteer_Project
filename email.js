@@ -2,8 +2,8 @@
 const nodemailer = require('nodemailer');
 
 const emailConfig = {
-  from: 'danbis664@gmail.com', // Replace with your email address
-  to: 'bisina06@gmail.com', // Replace with recipient email address
+  from: 'danbis664@gmail.com',
+  to: 'bisina06@gmail.com',
   subject: 'New post with video from Coindesk',
   text: 'New post with video:',
 };
@@ -20,9 +20,15 @@ const transporter = nodemailer.createTransport({
 async function sendVideoPostEmail(post) {
   const mailOptions = {
     ...emailConfig,
-    text: `${emailConfig.text} ${post.text}`,
+    text: `${emailConfig.text} ${post.text}. See video here: ${post.video}`,
   };
-  await transporter.sendMail(mailOptions);
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log('Email sent successfully!');
+  } catch (error) {
+    console.error('Error sending email:', error);
+  }
 }
+
 
 module.exports = sendVideoPostEmail;

@@ -2,10 +2,10 @@
 const { Pool } = require('pg');
 
 const dbConfig = {
-  user: 'postgres', // Replace with your database username
-  host: 'localhost', // Replace with your database host
-  database: 'scarperdb', // Replace with your database name
-  password: '200107', // Replace with your database password
+  user: 'postgres',
+  host: 'localhost',
+  database: 'scarperdb',
+  password: '200107',
   port: 5432,
 };
 
@@ -13,14 +13,12 @@ const pool = new Pool(dbConfig);
 
 async function savePost(post) {
   const { text, image, video } = post;
-  const existingPost = await db.query(`SELECT * FROM posts WHERE id = $1`, [text]);
+  const existingPost = await pool.query(`
+    SELECT * FROM posts 
+    WHERE text = $1 AND image = $2 AND video = $3
+  `, [text, image, video]);
   if (!existingPost.rows.length) {
-      await db.query(`INSERT INTO posts (id, text, image, video) VALUES ($1, $2, $3, $4)`, [text, image, video]);
-    }
-  try {
-    await pool.query(query, values);
-  } catch (error) {
-    console.error('Error saving post to database:', error);
+    await pool.query(`INSERT INTO posts (text, image, video) VALUES ($1, $2, $3)`, [text, image, video]);
   }
 }
 
