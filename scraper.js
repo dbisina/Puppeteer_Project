@@ -8,6 +8,7 @@ const url = "https://twitter.com/coindesk";
 async function scrapeCoindesk() {
   let browser;
   try {
+    browser = await puppeteer.connect({ browserWSEndpoint: process.env.BROWSER_WS_ENDPOINT });
     browser = await puppeteer.launch();
     const [page] = await browser.pages();
     const ua =
