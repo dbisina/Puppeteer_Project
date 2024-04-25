@@ -3,10 +3,10 @@ const { Pool } = require('pg');
 
 const dbConfig = {
   user: 'postgres',
-  host: 'localhost',
-  database: 'scarperdb',
-  password: '200107',
-  port: 5432,
+  host: 'monorail.proxy.rlwy.net',
+  database: 'railway',
+  password: 'ARsyYPnbsQLHTwayLhHZlAhIWeAYQciz',
+  port: 47281,
 };
 
 const pool = new Pool(dbConfig);
