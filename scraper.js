@@ -6,13 +6,13 @@ const fs = require("fs");
 const url = "https://twitter.com/coindesk";
 
 async function scrapeCoindesk() {
-  try {
-    const browserWSEndpoint = process.env.BROWSER_WS_ENDPOINT;
-    if (!browserWSEndpoint) {
-      throw new Error("Missing BROWSER_WS_ENDPOINT environment variable");
-    }
-
+ 
     try {
+      const browserWSEndpoint = process.env.BROWSER_WS_ENDPOINT;
+      if (!browserWSEndpoint) {
+        throw new Error("Missing BROWSER_WS_ENDPOINT environment variable");
+      }
+
       const browser = await puppeteer.connect({ browserWSEndpoint }); // Connect to existing browser
       const [page] = await browser.pages();
       const ua ="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36";
@@ -34,10 +34,10 @@ async function scrapeCoindesk() {
     } catch (err) {
       console.error("Error scraping Coindesk:", err);
       throw err; // Re-throw for potential handling in server.js
-    } finally {
+   } finally {
       await browser?.close();
-    }
-  }}
+    }  
+}
 
 async function scrapeTweets(page, tweetSel) {
     const posts = [];
