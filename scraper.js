@@ -18,7 +18,9 @@ async function scrapeCoindesk() {
         args: [
             "--no-sandbox",
             "--disable-gpu",
-        ]
+        ],
+        ignoreDefaultArgs: ['--disable-extensions']
+        
       })// Connect to existing browser
       const [page] = await browser.pages();
       const ua ="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36";
