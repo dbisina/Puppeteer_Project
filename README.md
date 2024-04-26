@@ -5,7 +5,7 @@ This documentation backend (including the Node.js server and database connection
 ##API Endpoint
 The API endpoint for retrieving paginated posts is:
 
-```https://puppeteerproject-production.up.railway.app/api/v1/posts?page={page}&limit={limit}```
+```https://puppeteerproject-production.up.railway.app/api/v1/posts```
 
 
 page: The desired page number (defaults to 1).
