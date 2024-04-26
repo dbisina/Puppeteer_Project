@@ -38,26 +38,36 @@ async function startServer() {
         // Download and save image (if present)
         if (post.image) {
           const url = post.image
-          const filename = generateUniqueFilename(post); // Generate unique filename
-          const imagePath = path.join(__dirname, 'images', filename);
-          if (!fs.existsSync(path.dirname(imagePath))) {
-            fs.mkdirSync(path.dirname(imagePath), { recursive: true }); // Create directory and parent directories if needed
-          }
           
-          async function downloadImage(url, imagePath) {
-            const response = await Axios({
+          async function downloadImage(url) {
+            const filename = generateUniqueFilename();
+            const imagePath = path.join(downloadDir, filename);
+          
+            // Check if download directory exists
+            if (!fs.existsSync(downloadDir)) {
+              fs.mkdirSync(downloadDir, { recursive: true }); // Create directory and parent directories if needed
+            }
+          
+            try {
+              const response = await Axios({
                 url,
                 method: 'GET',
                 responseType: 'stream'
-            });
-            return new Promise((resolve, reject) => {
-                response.data.pipe(fs.createWriteStream(imagePath))
-                    .on('error', reject)
-                    .once('close', () => resolve(imagePath)); 
               });
+          
+              return new Promise((resolve, reject) => {
+                const writeStream = fs.createWriteStream(imagePath);
+                response.data.pipe(writeStream)
+                  .on('error', reject)
+                  .once('close', () => resolve(imagePath));
+              });
+            } catch (error) {
+              console.error(`Error downloading image: ${error}`);
+              // Handle download error (e.g., log, retry logic)
+              return null; // Indicate download failure
             }
-
-          downloadImage(url, imagePath)
+          }
+          downloadImage(url)
         }
         
         
