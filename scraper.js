@@ -5,7 +5,7 @@ const fs = require("fs");
 
 const url = "https://twitter.com/coindesk";
 
-async function scrapeCoindesk(browser) {
+async function scrapeCoindesk() {
  
     try {
       const browserWSEndpoint = process.env.BROWSER_WS_ENDPOINT;
