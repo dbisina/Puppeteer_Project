@@ -8,12 +8,18 @@ const url = "https://twitter.com/coindesk";
 async function scrapeCoindesk() {
  
     try {
-      const browserWSEndpoint = process.env.BROWSER_WS_ENDPOINT;
-      if (!browserWSEndpoint) {
-        throw new Error("Missing BROWSER_WS_ENDPOINT environment variable");
-      }
+      // const browserWSEndpoint = process.env.BROWSER_WS_ENDPOINT;
+      // if (!browserWSEndpoint) {
+      //   throw new Error("Missing BROWSER_WS_ENDPOINT environment variable");
+      // }
       
-      const browser = await puppeteer.connect({ browserWSEndpoint }); // Connect to existing browser
+      const browser = await puppeteer.launch({
+        headless: true,
+        args: [
+            "--no-sandbox",
+            "--disable-gpu",
+        ]
+      })// Connect to existing browser
       const [page] = await browser.pages();
       const ua ="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36";
       await page.setUserAgent(ua);
