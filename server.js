@@ -14,7 +14,7 @@ app.use(express.json());
 
 async function startServer() {
   // Schedule scraping every 12 hours
-  cron.schedule('*/5 * * * *', async () => {
+  //cron.schedule('*/5 * * * *', async () => {
     try {
       const newPosts = await scraper();
       for (const post of newPosts) {
@@ -67,7 +67,7 @@ async function startServer() {
     } catch (error) {
       console.error('Error scraping and saving posts:', error);
     }
-  });
+ // });
 
   const PORT = process.env.PORT || 3000;
 
