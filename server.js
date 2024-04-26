@@ -40,6 +40,9 @@ async function startServer() {
           const url = post.image
           const filename = generateUniqueFilename(post); // Generate unique filename
           const imagePath = path.join(__dirname, 'images', filename);
+          if (!fs.existsSync(path.dirname(imagePath))) {
+            fs.mkdirSync(path.dirname(imagePath), { recursive: true }); // Create directory and parent directories if needed
+          }
           
           async function downloadImage(url, imagePath) {
             const response = await Axios({
